@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lateral Movement in Kubernetes Cluster</title>
+    <link rel="stylesheet" href="/styles.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
+
+    <!-- Load external JavaScript file -->
+    <script src="/load_md.js"></script>
+    
+    <!-- Call the function after the DOM is ready -->
+    <script defer>
+        load_md("introduction.md", "content");
+    </script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/index.html">About</a></li>
+            <li><a href="/teachings.html">Teachings</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h1>Lateral Movement in Kubernetes Cluster</h1>
+        
+        <div class="subnav">
+            <ul>
+                <li><a onclick="load_part(this)">Introduction</a></li>
+                <li><a onclick="load_part(this)">Plan</a></li>
+                <li><a onclick="load_part(this)">Session 1</a></li>
+                <li><a onclick="load_part(this)">Session 2</a></li>
+                <li><a onclick="load_part(this)">Session 3</a></li>
+                <li><a onclick="load_part(this)">Session 4</a></li>
+                <li><a onclick="load_part(this)">Session 5</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div id="content" class="md">Loading...</div> <!-- Markdown content will be inserted here -->
+        </div>
+    </main>
+
+<script>
+
+    function load_part(element) {
+        let text = element.textContent.replace(/\s+/g, "").toLowerCase(); // Get the text and remove extra spaces
+        load_md(text+".md", "content");
+    }
+
+
+</script>
+
+</body>
+</html>

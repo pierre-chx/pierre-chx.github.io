@@ -1,0 +1,61 @@
+NETWORK_NAME = "KubNet"
+NETWORK_MASK = "255.255.255.0"
+NETWORK_DHCP_ENABLED = false
+
+KUB_SCRIPT = "./kubinstall.sh"
+
+Vagrant.configure("2") do |config|
+    config.vm.provider :libvirt do |libvirt|
+        libvirt.driver = "kvm"
+        libvirt.host = 'localhost'
+        libvirt.uri = 'qemu:///system'
+        libvirt.cpus = 4
+        libvirt.memory = 4096
+    end
+    
+    config.vm.box = "debian/bookworm64"
+    config.vm.box_version = "12.20240905.1"
+    config.vm.synced_folder ".", "/vagrant", :disabled => true  
+    
+    # Define master nodes
+
+
+    config.vm.define "master1" do |master|
+        master.vm.hostname = "master1"
+        master.vm.network "private_network",
+            :libvirt__network_name => NETWORK_NAME,
+            :libvirt__dhcp_enabled => NETWORK_DHCP_ENABLED,
+            :netmask => NETWORK_MASK,
+            :ip => "10.0.2.2"
+
+        master.vm.provision "shell", path: KUB_SCRIPT
+    end
+
+
+    # Define worker nodes
+
+    (1..2).each do |i|
+        config.vm.define "worker#{i}" do |worker|
+            worker.vm.hostname = "worker#{i}"
+            worker.vm.network "private_network",
+                :libvirt__network_name => NETWORK_NAME,
+                :libvirt__dhcp_enabled => NETWORK_DHCP_ENABLED,
+                :netmask => NETWORK_MASK,
+                :ip => "10.0.2.1#{i}"
+            worker.vm.provision "shell", path: KUB_SCRIPT
+        end
+    end
+
+    # Define bastion
+
+    config.vm.define "bastion" do |bastion|
+        bastion.vm.hostname = "bastion"
+        bastion.vm.network "private_network",
+            :libvirt__network_name => NETWORK_NAME,
+            :libvirt__dhcp_enabled => NETWORK_DHCP_ENABLED,
+            :netmask => NETWORK_MASK,
+            :ip => "10.0.2.154"
+    end
+
+
+end
