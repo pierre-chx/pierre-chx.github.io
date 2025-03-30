@@ -34,7 +34,7 @@ To help you progress, we give a skeleton YAML file, where you will need to repla
 - **<python_server_port>**: This is the port you assigned to your python server in your script.
 
 The YAML skeleton is:
-```
+```YAML
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -116,20 +116,72 @@ This server should only be availbale from inside the cluster, its service type s
 
 ## Network rules:
 
-As of now, you should have deployed a frontend service, a middle-end service, and a backend service. However, right now the frontend service can access your backend service. Technically, if you added a NodePort service for your backend, it would even be reachable from outside. This is not a wanted behavior, and to force the attacker to do lateral movement, we will use Calico network rules so that backend service can only be reached from middle-end service.
+As of now, you should have deployed a frontend service, a middle-end service, and a backend service. However, right now the frontend service can access your backend service. Technically, if you added a NodePort service for your backend, it would even be reachable from outside. This is not a wanted behavior, and to force the attacker to do lateral movement, we will use Calico network rules so that backend service can only be reached from middle-end service, and middle-end only from frontent and backend.
+
+To do so, we use Calico network policies, using the following YAML template:
+
+```YAML
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: <policy_name>
+  namespace: default
+spec:
+  selector: app == '<app_name>'
+  types:
+    - Ingress
+    - Egress
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: app == '<app_in_1>'
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: app == '<app_in_2>'
+  egress:
+    - action: Allow
+      protocol: TCP
+      destination:
+        selector: app == '<app_out_1>'  
+    - action: Allow
+      protocol: TCP
+      destination:
+        selector: app == '<app_out_2>'
+```
+
+The network policies are applied to a specific service. For this service, we can choose which ingress traffic (packets coming in) to allow, and which egress traffic (packets going out) to allow. Using this template, create a policy to have middle-end accept exchanges only with frontend and backend, and for backend to accept exchanges only with middle-end. The frontend must be reachable from outside, this is why no network policy needs to be applied for this example.  
+
+Once the network policies are configured, try to access the backend directly from frontend (using for example `curl` commands). You shouldn't be able to. Your cluster should now be configured, ready to be attacked.
 
 ## To go further:
 
 <details> 
   <summary>Installing Metallb</summary> 
 
-In order to 
+In order to have a load balancer service and a specific IP for the service, you can configure MetalLB in your environment.  
+The documentation to install MetalLB is available [here](https://metallb.universe.tf/installation/#installation-by-manifest).  
+To then configure it, you can follow the examples given [here](https://metallb.universe.tf/configuration/). For ease of use, you should only do Layer2 configuration. Use IP addresses that are in the subnet of your VMs, such as IP addresses **between 10.0.2.50 and 10.0.2.100**, for example.  
+Once MetalLB is configured, create a load balancer service for your frontend, it should be assigned an IP address
 
 </details>  
 
 <details> 
   <summary>Using a Dockerfile</summary> 
 
-In order to 
+In order to properly create an image for your servers, that will then be directly used by Kubernetes, you must use a Dockerfile. To read more about dockerfiles, you can read [this](https://docs.docker.com/build/concepts/dockerfile/).  
+
+
+<!-- First, you might need to install docker on the master node. Then, in a subfolder, create a file named "Dockerfile", and follow the documentation to create a Dockerfile. Then, run the following command to create the image:
+
+```bash
+ docker build -t <image_name>:latest .
+```
+
+You might have to repeat these steps on all your nodes, in order for the image to be able to be deployed on every node.
+
+&rarr; I need to check how to create the docker image and then put it on every node -->
+
 
 </details>  
