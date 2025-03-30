@@ -3,6 +3,7 @@ function load_md(filename, elementId) {
         .then(response => response.text())
         .then(markdown => {
             let converter = new showdown.Converter({
+                ghCompatibleHeaderId: true,
                 ghCodeBlocks: true, // Enables GitHub-style code blocks
             });
 
