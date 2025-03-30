@@ -243,7 +243,7 @@ pre code {
     }
 
     .content img {
-        width: 80%;  /* Adjust image width on smaller screens */
+        width: 70%;  /* Adjust image width on smaller screens */
         height: auto;  /* Maintain aspect ratio */
     }
 

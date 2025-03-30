@@ -27,6 +27,7 @@ Pour aller plus loin :
 
 Pour aller plus loin : 
 - Déployer metallb pour faire du load-balancing sur le serveur frontend
+- Réaliser une image docker propre pour le serveur frontend, en utilisant une Dockerfile
 
 Pour aller beaucoup plus loin : 
 - Déployer une base de donnée non protégée à la place du serveur cible

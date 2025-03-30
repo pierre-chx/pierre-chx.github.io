@@ -1,6 +1,6 @@
 # Session 1
 
-This session is very guided, as it is the basis of the whole project, and can be quite tricky to configure without any guidance.
+The goal of this session is to create the Kubernetes cluster.
 
 ## Installing Vagrant: 
 
@@ -75,7 +75,7 @@ Once the cluster successfully initialised, **copy the commands** that are given 
 
 Your cluster should now be partly initialized !
 
-Now, you need to install a pod network add-on to be able to make microservices available. On the master node, first activate `kubectl' by pasting the following commands:
+Now, you need to install a pod network add-on to be able to make microservices available. On the master node, first activate `kubectl` by pasting the following commands:
 ```
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
