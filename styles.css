@@ -14,6 +14,19 @@ body {
     padding: 20px;
 }
 
+
+
+/*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
+
+/* Code Highlight background should be transparent */
+
+.hljs {
+    background: transparent !important; /* Removes white background */
+    padding: 10px;
+    border-radius: 8px; /* Optional: Rounds the corners */
+}
+
+
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
 
