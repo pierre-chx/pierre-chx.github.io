@@ -20,7 +20,7 @@ sudo apt install libvirt-daemon
 sudo apt install virt-manager
 ```
 
-Then, we add the user to the groups which are required to use the virtualization software (change **<your_user>** by your username):
+Then, we add the user to the groups which are required to use the virtualization software (change **&lt;your_user&gt;** by your username):
 ```bash
 sudo usermod -a -G libvirt-qemu <your_user>
 sudo usermod -a -G libvirt <your_user>
@@ -63,7 +63,7 @@ The `vagrant up` command should have created three virtual machines:
 - worker2: this is the second worker machine, which will run the applications and microservices of your cluster.
 
 
-After the installation succeeded, the cluster needs to be initialized. Vagrant allows an easy way to connect to the virtual machines, using the command `vagrant ssh <vm_name>`, where **<vm_name>** is either master1, worker1, or worker2. To initialize the cluster, first connect to the master node using:
+After the installation succeeded, the cluster needs to be initialized. Vagrant allows an easy way to connect to the virtual machines, using the command `vagrant ssh <vm_name>`, where **&lt;vm_name>** is either master1, worker1, or worker2. To initialize the cluster, first connect to the master node using:
 ```bash
 vagrant ssh master1
 ```

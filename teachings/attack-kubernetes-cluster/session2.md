@@ -11,7 +11,7 @@ This HTML form will be directly written in our python script, for ease of use.
 Then, develop a python script which will use this HTML as a string to host a
 server. To do so, you can use the `http.server.SimpleHTTPRequestHandler` python class (documentation: [here](https://docs.python.org/3/library/http.server.html#http.server.SimpleHTTPRequestHandler)). You will have to define a new object which inherits from this class, but with a new **GET** method for simple page loading, and a new **POST** method for running the command and then showing the result.  
 
-When the class for your server is created, you should then have it run forever when the script is launched (through `httpd.serve_forever()`, you can find more information in the documentation). You can test it by running the script and connect to `localhost:<port_number>`, where <port_number> is the port you choose in your script.
+When the class for your server is created, you should then have it run forever when the script is launched (through `httpd.serve_forever()`, you can find more information in the documentation). You can test it by running the script and connect to `localhost:<port_number>`, where &lt;port_number&gt; is the port you choose in your script.
 
 ### Create the YAML file for Kubernetes deployment:
 
@@ -22,16 +22,16 @@ We will create three kind of objects using YAML files:
 - ConfigMaps: we will use the ConfigMaps to store the python script,
 - Services: they are used to make your microservices available with a fixed network identity (fixed IP address, URL, ...).
 
-To help you progress, we give a skeleton YAML file, where you will need to replace all elements written between **<  >** in order to have a working service:
+To help you progress, we give a skeleton YAML file, where you will need to replace all elements written between **&lt;  &gt;** in order to have a working service:
 
-- **<deployment_name>**: Name of the deployment for one of your apps. Every deployment should have a different name.
-- **<app_name>**: Name of your app (be it html_vulnerable_server or anything). Every different app must have a different name. This name is needed so that the deployment can manage the containers, and so that the service can make the python servers available.
-- **<file_name>**: This will be the name of your python script, that will be stored in the container. It is needed both for container creation so that the container knows what to run, but also for the ConfigMap so that it knows under what filename to store your script.
-- **<config_name>**: This is the name of the ConfigMap. The ConfigMap will store the python script, and giving this ConfigMap name to a volume will store the data of the ConfigMap on the volume. Every ConfigMap must have a different name, linked with the app (to be easy to recognize).
-- **<your_python_code>**: This is where you put your whole python script.
-- **<service_name>**: The name of your service, every service needs a different one.
-- **<service_type>**: There are three types of services: **ClusterIP**, **NodePort** and **LoadBalancer**. ClusterIP services are only available inside the cluster, whereas NodePort services are available outside the cluster by using the IP of one of the cluster machines and the specific port given to this service. LoadBalancer services require specific softwares to work. In this lab, you will use only ClusterIP services and NodePort services (for LoadBalancer services, see the [To go further](#to-go-further) section).
-- **<python_server_port>**: This is the port you assigned to your python server in your script.
+- **&lt;deployment_name&gt;**: Name of the deployment for one of your apps. Every deployment should have a different name.
+- **&lt;app_name&gt;**: Name of your app (be it html_vulnerable_server or anything). Every different app must have a different name. This name is needed so that the deployment can manage the containers, and so that the service can make the python servers available.
+- **&lt;file_name&gt;**: This will be the name of your python script, that will be stored in the container. It is needed both for container creation so that the container knows what to run, but also for the ConfigMap so that it knows under what filename to store your script.
+- **&lt;config_name&gt;**: This is the name of the ConfigMap. The ConfigMap will store the python script, and giving this ConfigMap name to a volume will store the data of the ConfigMap on the volume. Every ConfigMap must have a different name, linked with the app (to be easy to recognize).
+- **&lt;your\_python\_code&gt;**: This is where you put your whole python script.
+- **&lt;service_name&gt;**: The name of your service, every service needs a different one.
+- **&lt;service_type&gt;**: There are three types of services: **ClusterIP**, **NodePort** and **LoadBalancer**. ClusterIP services are only available inside the cluster, whereas NodePort services are available outside the cluster by using the IP of one of the cluster machines and the specific port given to this service. LoadBalancer services require specific softwares to work. In this lab, you will use only ClusterIP services and NodePort services (for LoadBalancer services, see the [To go further](#to-go-further) section).
+- **&lt;python\_server\_port&gt;**: This is the port you assigned to your python server in your script.
 
 The YAML skeleton is:
 ```YAML
