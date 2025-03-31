@@ -6,7 +6,7 @@ The goal of this session is to create the Kubernetes cluster.
 
 First, we begin by installing the packages needed for virtualization:
 
-```
+```bash
 sudo apt-get purge vagrant-libvirt
 
 sudo apt-mark hold vagrant-libvirt
