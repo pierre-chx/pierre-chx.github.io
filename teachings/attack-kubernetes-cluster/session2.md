@@ -85,7 +85,7 @@ spec:
     port: 80
     targetPort: <python_server_port>
 ```
-**Remark:** We deploy the servers easily using a quick method. However, for more complex apps,we could instead have the HTML files outside the python script, and instead of using a ConfigMap, we could create a clean Docker Image on our machines and then use it in our YAML files (see (To go further)[#to-go-further] section to read more about it).
+**Remark:** We deploy the servers easily using a quick method. However, for more complex apps,we could instead have the HTML files outside the python script, and instead of using a ConfigMap, we could create a clean Docker Image on our machines and then use it in our YAML files (see [To go further](#to-go-further) section to read more about it).
 
 ### YAML file parameters for the vulnerable HTML server:
 
