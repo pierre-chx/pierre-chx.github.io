@@ -39,6 +39,11 @@ function load_md(filename, elementId) {
 }
 
 
+function load_part(element) {
+    let text = element.textContent.replace(/\s+/g, "").toLowerCase(); // Get the text and remove extra spaces
+    load_md(text+".md", "content");
+}
+
 
 // Function to trigger loading of Markdown when DOM is fully loaded
 function loadDOM_md(filename, elementId) {
