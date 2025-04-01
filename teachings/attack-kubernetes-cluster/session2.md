@@ -173,7 +173,7 @@ Once MetalLB is configured, create a load balancer service for your frontend, it
 In order to properly create an image for your servers, that will then be directly used by Kubernetes, you must use a Dockerfile. To read more about dockerfiles, you can read [this](https://docs.docker.com/build/concepts/dockerfile/).  
 
 
-<!-- First, you might need to install docker on the master node. Then, in a subfolder, create a file named "Dockerfile", and follow the documentation to create a Dockerfile. Then, run the following command to create the image:
+First, you might need to install docker on the master node. Then, in a subfolder, create a file named "Dockerfile", and follow the documentation to create a Dockerfile. Then, run the following command to create the image:
 
 ```bash
  docker build -t <image_name>:latest .
@@ -181,7 +181,6 @@ In order to properly create an image for your servers, that will then be directl
 
 You might have to repeat these steps on all your nodes, in order for the image to be able to be deployed on every node.
 
-&rarr; I need to check how to create the docker image and then put it on every node -->
 
 
 </details>  

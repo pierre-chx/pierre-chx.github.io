@@ -36,8 +36,47 @@ You should now have a shell going to the third terminal from the first, through 
 
 ## Attacking the frontend server
 
+In order to attack your frontend, you have to listen on a terminal on your machine, and then launch a connection from the frontend. You can do so using the commands explained in the cheatsheet and in the previous part.  
+After you've taken control of the frontend, give it access to internet. To do so, you can use the following command:
+```bash
+echo "nameserver 8.8.8.8" | tee -a /etc/resolv.conf > /dev/null
+```
+This command adds Google's nameserver in the configuration of the frontend container, which will allow you to use URLs.  
+Now, you can try and install different libraries. Recommended are `curl` and `nmap`. The first one allows you to easily make HTTP requests, and the second one allows to scan the network. To add a library, use the command:
+```bash
+apk add <library_name>
+```
+You are now able to do whatever you want with the frontend.
+
 ## Attacking the middle-end server
+
+To take control of the middle-end server, you need to chain the terminals. Knowing that `curl` can be used to send HTTP requests, try chaining the reverse shells to take control of the middle-end microservice. To check whether you have control or not, in your master1 node, get the IP addresses of the pods by running the command:
+```bash
+kubectl get pods -o wide
+```
+
+Then, in your terminal (in your machine), check which pod you have control of using:
+```bash
+ip a
+```
 
 ## Getting the flag
 
+Even though you have taken control of middle-end, you cannot install any tools on it because of network rules. To be able to get the flag, you can use a python to launch a command. The script should send the required HTTP request to the target server to get the flag. To send the python script to the middle-end, the easiest way is to write the script on your machine, then encode it in base64, get the encoded string, then write it like that:
+
+```bash
+echo "<encoded_string>" | base64 -d | tee send_nc_command.py >/dev/null
+```
+
+Then you can run the script, and you should get the flag.
+
 ## To go further
+
+<details> 
+  <summary>Complexifying the setup</summary> 
+
+In another [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/), try to deploy the same setup, but with more middle-end servers. For example, you can try to have a frontend, linked to a first microservice, which is linked to another microservice, which itself leads to the backend. In terms of architecture, this could for example be the case of having a webpage which when queried goes through an API gateway (for authorization purposes), then goes to an API server, and finally reaches the database.  
+Once this is done, try attacking this setup. You will now need to also write scripts to send the requests for the attacks.
+
+
+</details>  
