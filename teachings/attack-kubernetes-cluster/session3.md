@@ -70,6 +70,14 @@ echo "<encoded_string>" | base64 -d | tee send_nc_command.py >/dev/null
 
 Then you can run the script, and you should get the flag.
 
+
+## How to protect
+
+There are several ways you could use to protect your cluster:
+
+- Using Web Application Firewalls (WAF) to filter suspicious HTTP calls
+- Using a SIEM (Security Information and Event Management) to detect abnormal behaviors  
+
 ## To go further
 
 <details> 
