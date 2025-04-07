@@ -2,6 +2,20 @@
 
 The goal of this session is to create the Kubernetes cluster.
 
+
+
+<div class="warning">
+  ⚠️ <strong>Warning</strong>: For students who tried to use proxmox, there are two ways to proceed.<br>
+  Download this <a href="https://ubuntu.com/download/desktop">iso</a>, and create a VM with 16 GB RAM and 50 GB disk, or you will have to use the computer from the lab room.
+  <br><br>
+  
+<details> 
+  <summary>For proxmox</summary> 
+One of the students managed to create three debian VMs with proxmox, each with a different hostname. By using the commands given in the script <a href="resources/kub/kubinstall.sh">kubinstall.sh</a>, you can install everything needed for Kubernetes install (all commands have to be run). Then, you can follow the session 1 starting from after vagrant installation: See <a href="#creating-a-cluster">Creating a cluster</a>.
+ </details>
+</div>
+
+
 ## Installing Vagrant: 
 
 First, we begin by installing the packages needed for virtualization:
