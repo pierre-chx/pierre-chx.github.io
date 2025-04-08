@@ -1,6 +1,9 @@
 # Session 2
 
 The goal of this session is to deploy a chain of vulnerable microservices.
+<div class="warning">
+  ⚠️ <strong>Warning</strong>: Docker hub now limits the number of download of images per IP address. As you are in a private network, you share the same public IP address. Thus, only 100 downloads are allowed for the whole campus every 6 hours. To bypass this issue, you need to use another repository, and might need to use anotehr image. The image needs to have python 3.9 and netcat.
+</div>
 
 ## Vulnerable HTML server:
 
