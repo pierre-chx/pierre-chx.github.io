@@ -5,6 +5,7 @@ function load_md(filename, elementId) {
             let converter = new showdown.Converter({
                 ghCompatibleHeaderId: true,
                 ghCodeBlocks: true, // Enables GitHub-style code blocks
+                tables: true
             });
 
             let htmlContent = converter.makeHtml(markdown);
